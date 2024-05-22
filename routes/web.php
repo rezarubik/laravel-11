@@ -49,6 +49,12 @@ Route::get('/posts/{slug}', function ($slug) {
     $post = Arr::first($posts, function ($post) use ($slug) {
         return $post['slug'] == $slug;
     });
+    // todo: Jika menggunakan arrow function
+    // $post = Arr::first($posts, fn ($post) => $post['slug'] == $slug);
+    if (!$post) {
+        abort(404);
+    }
+
     return view('post', ['title' => 'Single Post', 'post' => $post]);
 });
 
