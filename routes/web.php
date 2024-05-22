@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 
@@ -9,6 +10,11 @@ Route::get('/', function () {
 });
 
 Route::get('/posts', function () {
+    $title = 'Posts';
+    return view('posts', ['title' => $title, 'title' => $title, 'posts' => Post::all()]);
+});
+
+Route::get('/posts/v1', function () {
     $title = 'Posts';
     $posts = [
         [
@@ -29,7 +35,12 @@ Route::get('/posts', function () {
     return view('posts', ['title' => $title, 'title' => $title, 'posts' => $posts]);
 });
 
-Route::get('/posts/{slug}', function ($slug) {
+Route::get('/posts/{post:slug}', function (Post $post) {
+    // 
+    return view('post', ['title' => 'Single Post', 'post' => $post]);
+});
+
+Route::get('/posts/{slug}/oldversion', function ($slug) {
     $posts = [
         [
             'id' => 1,
