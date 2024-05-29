@@ -50,7 +50,7 @@ class User extends Authenticatable
     /**
      * NOTE: Belongs to post
      */
-    public function post(): HasMany
+    public function posts(): HasMany
     {
         return $this->hasMany(Post::class, 'author_id');
     }
